@@ -14,8 +14,7 @@ polling_headers: |-
   Accept= application/json, text/plain, */*
   Accept-Encoding= deflate, gzip, br, zstd
   Accept-Language= en-US,en;q=0.7,it;q=0.3
-refresh_interval: 30
-id: null
+refresh_interval: 1
 custom_fields:
   - keyname: author_bio
     field_type: author_bio
