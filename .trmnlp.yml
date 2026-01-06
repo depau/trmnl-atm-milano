@@ -8,7 +8,7 @@ watch:
 
 # values of custom fields (defined in src/settings.yml)
 custom_fields:
-  stop_ids: "11503,15436"
+  stop_ids: "17393,12479,11503,15436"
   show_stop_names: "On"
   condense_table: "On"
 
@@ -16,20 +16,49 @@ custom_fields:
 variables:
   trmnl: {}
   IDX_0:
+    Description: "Cairoli M1"
+    Lines:
+      - Line:
+          LineCode: "57"
+          LineDescription: "N57 - Quarto Oggiaro - Cairoli M1"
+        WaitMessage: "7 min"
+
+  IDX_1:
+    Description: "V.le Romagna (Piola M2)"
+    Lines:
+      - Line:
+          LineCode: "62"
+          LineDescription: "P.ta Romana M3 - P.za Sire Raul"
+        WaitMessage: "no serv."
+      - Line:
+          LineCode: "91"
+          LineDescription: "Lodi M3 - Lotto M1 M5 (Circolare Sinistra)"
+        WaitMessage: "30 min"
+
+  IDX_2:
     Description: "Duomo M1 M3"
     Lines:
       - Line:
-          LineCode: NM1
-          LineDescription: "NOTTURNA Sesto FS M1 - Molino Dorino M1"
-        WaitMessage: ricalcolo
+          LineCode: "12"
+          LineDescription: "P.za Ovidio - Roserio (Ospedale Sacco)"
+        WaitMessage: "no serv."
       - Line:
-          LineCode: NM3
-          LineDescription: "NOTTURNA San Donato M3 - Comasina M3"
-        WaitMessage: 21 min
-  IDX_1:
+          LineCode: "16"
+          LineDescription: "Via Monte Velino - San Siro Stadio M5"
+        WaitMessage: null
+      - Line:
+          LineCode: "19"
+          LineDescription: "Lambrate FS M2 - P.za Castelli"
+        WaitMessage: null
+      - Line:
+          LineCode: "NM1"
+          LineDescription: "NOTTURNA Sesto FS M1 - Molino Dorino M1"
+        WaitMessage: "24 min"
+
+  IDX_3:
     Description: "Maciachini M3"
     Lines:
       - Line:
           LineCode: "82"
           LineDescription: "Q.re Bovisasca - Zara M3 M5"
-        WaitMessage: in arrivo
+        WaitMessage: "no serv."
