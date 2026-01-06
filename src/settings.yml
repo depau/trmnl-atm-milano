@@ -15,6 +15,7 @@ polling_headers: |-
   Accept-Encoding= deflate, gzip, br, zstd
   Accept-Language= en-US,en;q=0.7,it;q=0.3
 refresh_interval: 1
+id: null
 custom_fields:
   - keyname: author_bio
     field_type: author_bio
@@ -24,7 +25,7 @@ custom_fields:
     description-it: |
       Nota: plugin non ufficiale, non approvato da ATM Milano.
       Mostra il tabellone orario in tempo reale per le fermate bus/tram ATM selezionate.
-    name: ATM Milano Bus/Tram timetable
+    name: ATM Milano bus/tram live timetable
     category: travel
     github_url: "https://github.com/depau"
     email_address: "davide+trmnl@depau.eu"
@@ -52,12 +53,29 @@ custom_fields:
       - "On"
       - "Off"
     description-it: "Usa una spaziatura ridotta per la tabella. Raccomandato quando non sono mostrati i nomi delle fermate."
+  - keyname: line_num_style
+    field_type: select
+    name: Line number style
+    description: Style of the line number
+    default: label--inverted
+    options:
+      - Plain: ""
+      - Outlined: label--outline
+      - Inverted: label--inverted
+    description-it: "Stile per il numero della linea"
+  - keyname: title
+    field_type: string
+    name: Title
+    description: Title for the plugin. Leave empty to use the ATM logo.
+    placeholder: Linee ATM
+    default: ""
+    optional: true
+    description-it: "Titolo per il plugin. Lascia vuoto per usare il logo ATM."
   - keyname: refreshed_label
     field_type: string
-    name: '"Refreshed" label'
-    description: 'Label to use for the "refreshed" banner'
-    placeholder: aggiornato
-    default: aggiornato
+    name: Refreshed label
+    description: Label to use for the refreshed banner
+    placeholder: refreshed
+    default: refreshed
     optional: true
-    description-it: >
-      Testo da usare nell'indicatore "refreshed"/"aggiornato"
+    description-it: "Testo da usare nell'indicatore refreshed/aggiornato"

@@ -11,6 +11,9 @@ custom_fields:
   stop_ids: "17393,12479,11503,15436"
   show_stop_names: "On"
   condense_table: "On"
+  line_num_style: "label--inverted"
+  title: ""
+  refreshed_label: "aggiornato"
 
 # override variables
 variables:

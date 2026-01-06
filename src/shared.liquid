@@ -1,19 +1,5 @@
 {% assign num_urls = trmnl.plugin_settings.polling_url | newline_to_br | split: '<br />' | size %}
 
-{% template render_line %}
-<tr>
-  <td>
-    <span class="title title--small">
-      <strong>{{- line.Line.LineCode }}</strong> <span class="label--gray-45">per</span>
-      <strong>{{ line.Line.LineDescription | split: ' - ' | last | strip }}</strong>
-    </span>
-  </td>
-  <td>
-    <span class="label">{{ line.WaitMessage }}</span>
-  </td>
-</tr>
-{% endtemplate %}
-
 {% template render_stop_desc %}
 {% unless trmnl.plugin_settings.custom_fields_values.show_stop_names == 'Off' %}
   <tr>
@@ -22,6 +8,23 @@
     </td>
   </tr>
 {% endunless %}
+{% endtemplate %}
+
+{% template render_line %}
+<tr>
+  <td>
+    <span class="title title--small">
+      <span class="label {{ trmnl.plugin_settings.custom_fields_values.line_num_style }}">
+        {{- line.Line.LineCode -}}
+      </span>
+      <span class="label--gray text--gray-20">per</span>
+      <span class="label">{{ line.Line.LineDescription | split: ' - ' | last | strip }}</span>
+    </span>
+  </td>
+  <td>
+    <span class="label">{{ line.WaitMessage }}</span>
+  </td>
+</tr>
 {% endtemplate %}
 
 <table
@@ -86,11 +89,17 @@
 </table>
 
 <div class="title_bar">
-  <img
-    class="image"
-    src="https://raw.githubusercontent.com/depau/trmnl-atm-milano/refs/heads/main/atm-logo-black.svg"
-    alt="ATM Milano"
-  >
+  {% assign title = trmnl.plugin_settings.custom_fields_values.title %}
+  {% if title and title != '' %}
+    <span class="title">{{ title }}</span>
+  {% else %}
+    <img
+      class="image p--1"
+      src="https://raw.githubusercontent.com/depau/trmnl-atm-milano/refs/heads/main/atm-logo-black.svg"
+      alt="ATM Milano"
+    >
+  {% endif %}
+
   <span class="instance">
     {{- trmnl.plugin_settings.custom_fields_values.refreshed_label | default: 'aggiornato' }}:
     {{ 'now' | date: '%H:%M:%S' -}}
