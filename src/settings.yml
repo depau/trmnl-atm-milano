@@ -1,0 +1,64 @@
+name: "ATM Milano Bus/Tram timetable"
+no_screen_padding: "no"
+dark_mode: "no"
+strategy: polling
+polling_verb: get
+polling_url: |-
+  {% assign ids = stop_ids | split: "," -%}
+  {% for id in ids -%}
+  https://giromilano.atm.it/proxy.tpportal/api/tpPortal/geodata/pois/stops/{{ id }}
+  {% endfor %}
+polling_headers: |-
+  Referer= https=//giromilano.atm.it/
+  User-Agent= Mozilla/5.0 (X11; Linux x86_64; rv=146.0) Gecko/20100101 Firefox/146.0
+  Accept= application/json, text/plain, */*
+  Accept-Encoding= deflate, gzip, br, zstd
+  Accept-Language= en-US,en;q=0.7,it;q=0.3
+refresh_interval: 30
+id: null
+custom_fields:
+  - keyname: author_bio
+    field_type: author_bio
+    description: |
+      Note: unofficial plugin, not endorsed by ATM Milano.
+      Display the live time table for the selected ATM Milano bus/tram stops.
+    description-it: |
+      Nota: plugin non ufficiale, non approvato da ATM Milano.
+      Mostra il tabellone orario in tempo reale per le fermate bus/tram ATM selezionate.
+    name: ATM Milano Bus/Tram timetable
+    category: travel
+    github_url: "https://github.com/depau"
+    email_address: "davide+trmnl@depau.eu"
+  - keyname: stop_ids
+    field_type: multi_string
+    name: Bus/tram stops
+    description: "List of stop numbers, for instance 11503"
+    placeholder: "11503"
+    description-it: "Elenco di numeri fermata ATM, ad es. 11503"
+  - keyname: show_stop_names
+    field_type: select
+    name: Show stop names
+    description: Whether to show stop names
+    default: "On"
+    options:
+      - "On"
+      - "Off"
+    description-it: "Mostra o nascondi i nomi delle fermate"
+  - keyname: condense_table
+    field_type: select
+    name: Reduce table spacing
+    description: "Use narrower table spacing, recommended when stop names are displayed."
+    default: "On"
+    options:
+      - "On"
+      - "Off"
+    description-it: "Usa una spaziatura ridotta per la tabella. Raccomandato quando non sono mostrati i nomi delle fermate."
+  - keyname: refreshed_label
+    field_type: string
+    name: '"Refreshed" label'
+    description: 'Label to use for the "refreshed" banner'
+    placeholder: refreshed
+    default: refreshed
+    optional: true
+    description-it: >
+      Testo da usare nell'indicatore "refreshed"/"aggiornato"

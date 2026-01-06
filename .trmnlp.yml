@@ -1,0 +1,35 @@
+# TRMNLP configuration
+# {{ env.VARIABLE }} interpolation is available here
+---
+# auto-reload when files change (`watch: false` to disable)
+watch:
+  - .trmnlp.yml
+  - src
+
+# values of custom fields (defined in src/settings.yml)
+custom_fields:
+  stop_ids: "11503,15436"
+  show_stop_names: "On"
+  condense_table: "On"
+
+# override variables
+variables:
+  trmnl: {}
+  IDX_0:
+    Description: "Duomo M1 M3"
+    Lines:
+      - Line:
+          LineCode: NM1
+          LineDescription: "NOTTURNA Sesto FS M1 - Molino Dorino M1"
+        WaitMessage: ricalcolo
+      - Line:
+          LineCode: NM3
+          LineDescription: "NOTTURNA San Donato M3 - Comasina M3"
+        WaitMessage: 21 min
+  IDX_1:
+    Description: "Maciachini M3"
+    Lines:
+      - Line:
+          LineCode: "82"
+          LineDescription: "Q.re Bovisasca - Zara M3 M5"
+        WaitMessage: in arrivo

@@ -1,0 +1,98 @@
+{% assign num_urls = trmnl.plugin_settings.polling_url | newline_to_br | split: '<br />' | size %}
+
+{% template render_line %}
+<tr>
+  <td>
+    <span class="title title--small">
+      <strong>{{- line.Line.LineCode }}</strong> <span class="label--gray-45">per</span>
+      <strong>{{ line.Line.LineDescription | split: ' - ' | last | strip }}</strong>
+    </span>
+  </td>
+  <td>
+    <span class="label">{{ line.WaitMessage }}</span>
+  </td>
+</tr>
+{% endtemplate %}
+
+{% template render_stop_desc %}
+{% unless trmnl.plugin_settings.custom_fields_values.show_stop_names == 'Off' %}
+  <tr>
+    <td colspan="2">
+      <span class="label label--small">{{ desc }}</span>
+    </td>
+  </tr>
+{% endunless %}
+{% endtemplate %}
+
+<table
+  class="table m--3 {% unless trmnl.plugin_settings.custom_fields_values.condense_table == 'Off' %}table--small{% endunless %}"
+  data-table-limit="true"
+>
+  <thead>
+    <tr>
+      <th><span class="title">Linea</span></th>
+      <th><span class="title">Attesa</span></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if num_urls == 1 %}
+      {% render 'render_stop_desc', desc: Description, trmnl: trmnl %}
+      {% for line in Lines %}
+        {% render 'render_line', line: line, trmnl: trmnl %}
+      {% endfor %}
+
+    {% else %}
+      {% for idx in (0..num_urls) %}
+        <!-- Ugly hack -->
+
+        {% if idx == 0 %}
+          {% assign item = IDX_0 %}
+        {% elsif idx == 1 %}
+          {% assign item = IDX_1 %}
+        {% elsif idx == 2 %}
+          {% assign item = IDX_2 %}
+        {% elsif idx == 3 %}
+          {% assign item = IDX_3 %}
+        {% elsif idx == 4 %}
+          {% assign item = IDX_4 %}
+        {% elsif idx == 5 %}
+          {% assign item = IDX_5 %}
+        {% elsif idx == 6 %}
+          {% assign item = IDX_6 %}
+        {% elsif idx == 7 %}
+          {% assign item = IDX_7 %}
+        {% elsif idx == 8 %}
+          {% assign item = IDX_8 %}
+        {% elsif idx == 9 %}
+          {% assign item = IDX_9 %}
+        {% endif %}
+
+        {% unless idx >= 10 %}
+          {% render 'render_stop_desc', desc: item.Description, trmnl: trmnl %}
+          {% for line in item.Lines %}
+            {% render 'render_line', line: line, trmnl: trmnl %}
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td colspan="2">
+              <span class="label label--gray">e altre {{ num_urls | minus: 10 }}</span>
+            </td>
+          </tr>
+          {% break %}
+        {% endunless %}
+      {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+
+<div class="title_bar">
+  <img
+    class="image image-dither"
+    src="https://upload.wikimedia.org/wikipedia/commons/a/a6/ATM_Milano_-_logo_%28Italy%2C_1972%29.svg"
+    alt="ATM Milano"
+  >
+  <span class="instance">
+    {{- trmnl.plugin_settings.custom_fields_values.refreshed_label | default: 'refreshed' }}:
+    {{ 'now' | date: '%H:%M:%S' -}}
+  </span>
+</div>
