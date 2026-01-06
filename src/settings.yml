@@ -79,3 +79,13 @@ custom_fields:
     default: refreshed
     optional: true
     description-it: "Testo da usare nell'indicatore refreshed/aggiornato"
+  - keyname: text_size
+    field_type: select
+    name: Text size
+    default: value--xsmall
+    options:
+      - Extra small: value--xxsmall
+      - Small: value--xsmall
+      - Regular: value--small
+      - Large: ""
+      - Extra large: value--large

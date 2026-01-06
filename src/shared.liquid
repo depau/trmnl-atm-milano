@@ -4,25 +4,24 @@
 {% unless trmnl.plugin_settings.custom_fields_values.show_stop_names == 'Off' %}
   <tr>
     <td colspan="2">
-      <span class="label label--small">{{ desc }}</span>
+      <span class="description">{{ desc }}</span>
     </td>
   </tr>
 {% endunless %}
 {% endtemplate %}
 
 {% template render_line %}
+{% assign text_class = trmnl.plugin_settings.custom_fields_values.text_size | default: 'value--xsmall' %}
 <tr>
   <td>
-    <span class="title title--small">
-      <span class="label {{ trmnl.plugin_settings.custom_fields_values.line_num_style }}">
-        {{- line.Line.LineCode -}}
-      </span>
-      <span class="label--gray text--gray-20">per</span>
-      <span class="label">{{ line.Line.LineDescription | split: ' - ' | last | strip }}</span>
+    <span class="value {{ text_class }} {{ trmnl.plugin_settings.custom_fields_values.line_num_style }}">
+      {{- line.Line.LineCode -}}
     </span>
+    <span class="value {{ text_class }} value--gray text--gray-20">per</span>
+    <span class="value {{ text_class }}">{{ line.Line.LineDescription | split: ' - ' | last | strip }}</span>
   </td>
   <td>
-    <span class="label">{{ line.WaitMessage }}</span>
+    <span class="value {{ text_class }}">{{ line.WaitMessage }}</span>
   </td>
 </tr>
 {% endtemplate %}
